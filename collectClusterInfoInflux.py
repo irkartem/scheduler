@@ -98,7 +98,7 @@ if __name__ == '__main__':
                         if int(vls['maxvmcount']) > int(vls['countvm']):
                             vdsavailable += int(vls['maxvmcount']) - int(vls['countvm'])
                             available += 1
-                    if panel == 'vemgr' and int(vls['storageinfo'].split('.')[0]) < 85 and int(vls['meminfo'].split('.')[0]) < 70 and int(vls['maxvmcnt']) > 10 and vls['disabled'] == 0:
+                    if panel == 'vemgr' and int(vls['storageinfo'].split('.')[0]) < 85 and int(vls['meminfo'].split('.')[0]) < 70 and int(vls['maxvmcnt']) > 2 and vls['disabled'] == 0:
                         if int(vls['maxvmcnt']) > int(vls['vmcount']):
                             vdsavailable += int(vls['maxvmcnt']) - int(vls['vmcount'])
                             available += 1
