@@ -108,7 +108,7 @@ if __name__ == '__main__':
         {
             "measurement": "clusters",
             "tags": {
-                "name": hn,
+                "cluster": hn,
             },
             "fields": {
                 "limitvds": int(vdsavailable),
