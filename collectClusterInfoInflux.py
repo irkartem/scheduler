@@ -40,7 +40,7 @@ if __name__ == '__main__':
     nodes = outj['kvmaster'] + outj['vzmaster']
     if len(nodes) < 2:
         sys.exit("Empty list of processingmodules {}".format(nodes))
-    tout = 'cron:checknodes\n'
+    tout = 'cron:collectClusterInfoInflux\n'
     for hn in nodes:
         if hn in ["moon.hoztnode.net",]: continue
         if 'jupiter' in hn: continue
@@ -91,6 +91,9 @@ if __name__ == '__main__':
                             print(out)
                     if panel == 'vmmgr' and int(vls['storageinfo'].split('.')[0]) < 80 and int(vls['meminfo'].split('.')[0]) < 70 and int(vls['maxvmcount']) > 10 and vls['disabled'] == 0:
                         if int(vls['maxvmcount']) == int(vls['countvm']):
+                            nlimit = int(vls['countvm']) + 1
+                            out = decreaseLimit(hn,vls['id'],nlimit,panel)
+                            print(out)
                             tout += '{} UNUSED NODE mem={} store={} vds={}/{}\n'.format(vls['name'],vls['meminfo'],vls['storageinfo'],vls['countvm'],vls['maxvmcount'])
                         if int(vls['maxvmcount']) > int(vls['countvm']):
                             vdsavailable += int(vls['maxvmcount']) - int(vls['countvm'])
