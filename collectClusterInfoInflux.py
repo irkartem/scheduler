@@ -88,7 +88,7 @@ if __name__ == '__main__':
                         if panel == 'vmmgr' and int(vls['maxvmcount']) >= int(vls['countvm']):
                             nlimit = int(vls['countvm']) - 1
                             out = decreaseLimit(hn,vls['id'],nlimit,panel)
-                            print("Decreased {}/{} {}".format(nlimit,vls['maxvmcount'],out)
+                            print("Decreased {}/{} {}".format(nlimit,vls['maxvmcount'],out))
                     if panel == 'vmmgr' and int(vls['storageinfo'].split('.')[0]) < 80 and int(vls['meminfo'].split('.')[0]) < 70 and int(vls['maxvmcount']) > 2 and vls['disabled'] == 0:
                         if int(vls['maxvmcount']) == int(vls['countvm']):
                             nlimit = int(vls['countvm']) + 1
