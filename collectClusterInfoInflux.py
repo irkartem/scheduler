@@ -81,18 +81,18 @@ if __name__ == '__main__':
                         if int(vls['maxvmcount']) >= int(vls['countvm']):
                             nlimit = int(vls['countvm']) - 1
                             out = decreaseLimit(hn,vls['id'],nlimit,panel)
-                            print(out)
+                            print("Decreased {}/{} {}".format(nlimit,vls['maxvmcount'],out)
                     if int(vls['storageinfo'].split('.')[0]) > 90:
                         overdisk += 1
-                        print("{} overmem {}".format(vls['name'],vls['meminfo']))
+                        print("{} overdisk {}".format(vls['name'],vls['meminfo']))
                         if panel == 'vmmgr' and int(vls['maxvmcount']) >= int(vls['countvm']):
                             nlimit = int(vls['countvm']) - 1
                             out = decreaseLimit(hn,vls['id'],nlimit,panel)
-                            print(out)
+                            print("Decreased {}/{} {}".format(nlimit,vls['maxvmcount'],out)
                     if panel == 'vmmgr' and int(vls['storageinfo'].split('.')[0]) < 80 and int(vls['meminfo'].split('.')[0]) < 70 and int(vls['maxvmcount']) > 2 and vls['disabled'] == 0:
                         if int(vls['maxvmcount']) == int(vls['countvm']):
                             nlimit = int(vls['countvm']) + 1
-                            out = decreaseLimit(hn,vls['id'],nlimit,panel)
+                            if 'neptune' not in hn: out = decreaseLimit(hn,vls['id'],nlimit,panel)
                             print(out)
                             tout += '{} UNUSED NODE mem={} store={} vds={}/{}\n'.format(vls['name'],vls['meminfo'],vls['storageinfo'],vls['countvm'],vls['maxvmcount'])
                         if int(vls['maxvmcount']) > int(vls['countvm']):
