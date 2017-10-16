@@ -64,10 +64,10 @@ if __name__ == '__main__':
             speed = 0
             if "MB" in l:
                 print(l)
-                tray = l.split(' ')
+                tray = l.split()
                 print(tray)
                 speed = tray[-2]
         json_body = [{"measurement": "nodeDdspeed", "tags": {"nodename": hn, },
-            "fields": {"ddspeed": int(speed)} }]
+            "fields": {"ddspeed": speed} }]
         print(json_body)
         # print(sendinflux(json_body))
