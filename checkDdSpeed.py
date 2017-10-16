@@ -61,13 +61,13 @@ if __name__ == '__main__':
         output = subprocess.run("ansible all -i '{},' -m shell -a 'dd if=/dev/zero of=/{}/test bs=64k count=16k conv=fdatasync '".format(
             hn, panel), shell=True, stdout=subprocess.PIPE, universal_newlines=True)
         for l in str(output.stdout).split('\n'):
-            speed = 0
+            spd = 0
             if "MB" in l:
                 print(l)
                 tray = l.split()
                 print(tray)
-                speed = tray[-2]
+                spd = tray[-2]
         json_body = [{"measurement": "nodeDdspeed", "tags": {"nodename": hn, },
-            "fields": {"ddspeed": speed} }]
+                     "fields": {"ddspeed": spd}}]
         print(json_body)
         # print(sendinflux(json_body))
