@@ -64,8 +64,8 @@ if __name__ == '__main__':
             speed = 0
             if "MB" in l:
                 print(l)
-                speed = l.split(' ')[-2]
-                print(l.split(' '))
+                speed = l.split(' ')[7]
+                #print(l.split(' '))
         json_body = [{"measurement": "nodeDdspeed", "tags": {"nodename": hn, },
             "fields": {"ddspeed": int(speed)} }]
         print(json_body)
