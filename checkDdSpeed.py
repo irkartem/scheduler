@@ -68,6 +68,6 @@ if __name__ == '__main__':
                 print(tray)
                 spd = tray[-2]
         json_body = [{"measurement": "nodeDdspeed", "tags": {"nodename": hn, },
-                     "fields": {"ddspeed": spd}}]
+                     "fields": {"ddspeed": tray[-2]}}]
         print(json_body)
         # print(sendinflux(json_body))
