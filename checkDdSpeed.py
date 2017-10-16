@@ -49,20 +49,21 @@ if __name__ == '__main__':
         sys.exit("Empty list of processingmodules {}".format(nodes))
     tout = 'cron:checkDdSpeed\n'
     for hn in nodes:
+        if len(hn) < 3:
+            continue
         if hn in ["moon.hoztnode.net", ]:
             continue
         if 'jupiter' in hn:
             continue
-        panel = 'vmmgr'
+        panel = 'vm'
         if hn in outj['vzmaster']:
-            panel = 'vemgr'
-        if len(hn) < 3:
-            continue
-        output = subprocess.run("ansible all -i '{},' -m shell -a '/usr/local/mgr5/sbin/mgrctl -m {} vmhostnode'".format(
+            panel = 'vz'
+        output = subprocess.run("ansible all -i '{},' -m shell -a 'dd if=/dev/zero of=/{}/test bs=64k count=16k conv=fdatasync '".format(
             hn, panel), shell=True, stdout=subprocess.PIPE, universal_newlines=True)
         for l in str(output.stdout).split('\n'):
             speed = 0
-            if "MB/s" in l:
+            if "MB" in l:
+                print(l)
                 speed = l.split(' ')[-2]
         json_body = [{"measurement": "nodeDdspeed", "tags": {"nodename": hn, },
             "fields": {"ddspeed": int(speed)} }]
