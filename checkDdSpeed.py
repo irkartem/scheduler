@@ -63,11 +63,11 @@ if __name__ == '__main__':
         for l in str(output.stdout).split('\n'):
             if "MB" in l:
                 print(l)
-                tray = l.split()
+                tray = l.replace(',', '.').split()
                 print(tray)
         try:
             json_body = [{"measurement": "nodeDdspeed", "tags": {"nodename": hn, },
-                          "fields": {"ddspeed": int(tray[-2].split(',', '.')[0])}}]
+                          "fields": {"ddspeed": int(tray[-2])}}]
             print(json_body)
             print(sendinflux(json_body))
         except IndexError:
