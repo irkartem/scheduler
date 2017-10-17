@@ -66,8 +66,9 @@ if __name__ == '__main__':
                 tray = l.replace(',', '.').split()
                 print(tray)
         try:
+            sp = tray[-2].split('.')[0]
             json_body = [{"measurement": "nodeDdspeed", "tags": {"nodename": hn, },
-                          "fields": {"ddspeed": float(tray[-2])}}]
+                          "fields": {"ddspeed": int(sp)}}]
             print(json_body)
             print(sendinflux(json_body))
         except IndexError:
