@@ -10,4 +10,6 @@ def read_authfile(path):
 ps = read_authfile('/opt/auth/asterisk')
 out = requests.get('http://asterisk.ispsystem.net/triple.txt', auth=('cron', ps))
 
-print(out.text)
+for l in out.text.splitlines():
+    ray = l.strip().split(';')
+    print(ray)
