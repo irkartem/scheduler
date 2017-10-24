@@ -58,8 +58,8 @@ if __name__ == '__main__':
         panel = 'vm'
         if hn in outj['vzmaster']:
             panel = 'vz'
-        output = subprocess.run("ansible all -f 230  -i '{},' -m shell -a 'dd if=/dev/zero of=/{}/test bs=64k count=16k conv=fdatasync '".format(
-            hn, panel), shell=True, stdout=subprocess.PIPE, universal_newlines=True)
+        output = subprocess.run("ansible all -f 230  -i '{},' -m shell -a 'dd if=/dev/zero of=/{}/test bs=64k count=16k conv=fdatasync;/bin/rm -f /{}/test '".format(
+            hn, panel, panel), shell=True, stdout=subprocess.PIPE, universal_newlines=True)
         for l in str(output.stdout).split('\n'):
             if "MB" in l:
                 print(l)
