@@ -90,6 +90,7 @@ if __name__ == '__main__':
                             nlimit = int(vls['countvm']) - 1
                             out = decreaseLimit(hn, vls['id'], nlimit, panel)
                             print("Decreased {}/{} {}".format(nlimit, vls['maxvmcount'], out))
+                            tout = "Decreased {}/{} {} \n".format(nlimit, vls['maxvmcount'], out)
                     if int(vls['storageinfo'].split('.')[0]) > 90:
                         overdisk += 1
                         print("{} overdisk {}".format(vls['name'], vls['meminfo']))
