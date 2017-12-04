@@ -23,7 +23,7 @@ with open('/opt/db/kvntempl', 'r') as vzconf:
     for line in vzconf:
         k,v = line.strip().split(' ')[:2]
         kvmdict[k] = v
-output = subprocess.run("ansible vznode -i /opt/ansible/inventory.py -m shell -a '/opt/listOStmp.py'", shell=True, stdout=subprocess.PIPE,universal_newlines=True) 
+output = subprocess.run("ansible vznode -i /opt/inventory -m shell -a '/opt/listOStmp.py'", shell=True, stdout=subprocess.PIPE,universal_newlines=True) 
 for l in str(output.stdout).split('\n'):
     if 'SUCCESS' in l: continue
     if 'FAILED' in l:
@@ -41,7 +41,7 @@ for l in str(output.stdout).split('\n'):
         print ("wrong TMPL {} {} {}".format(name,osname,ver))
         print ("wrong TMPL {} {} {}\n".format(name,osname,vzdict[osname]))
 
-output = subprocess.run("ansible kvnode -i /opt/ansible/inventory.py -m shell -a '/opt/listOStmp.py'", shell=True, stdout=subprocess.PIPE,universal_newlines=True) 
+output = subprocess.run("ansible kvnode -i /opt/inventory -m shell -a '/opt/listOStmp.py'", shell=True, stdout=subprocess.PIPE,universal_newlines=True) 
 for l in str(output.stdout).split('\n'):
     chk = kvdict
     if "neptune" in l or "moon" in l or "isp-vm" in l or "ndr" in l: continue
