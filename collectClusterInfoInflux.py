@@ -46,7 +46,7 @@ if __name__ == '__main__':
         sys.exit("Empty list of processingmodules {}".format(nodes))
     tout = 'cron:collectClusterInfoInflux\n'
     for hn in nodes:
-        if hn in ["moon.hoztnode.net", ]:
+        if hn in ["moon.hoztnode.net", "msk-ve.hoztnode.net","msk-ve.ispsystem.net"]:
             continue
         if 'jupiter' in hn:
             continue

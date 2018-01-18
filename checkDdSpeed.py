@@ -58,19 +58,22 @@ if __name__ == '__main__':
         panel = 'vm'
         if hn in outj['vzmaster']:
             panel = 'vz'
-        output = subprocess.run("ansible all -f 230  -i '{},' -m shell -a 'dd if=/dev/zero of=/{}/test bs=64k count=16k conv=fdatasync;/bin/rm -f /{}/test '".format(
+        #output = subprocess.run("ansible all -f 230  -i '{},' -m shell -a 'dd if=/dev/zero of=/{}/test bs=64k count=16k conv=fdatasync oflag=direct;/bin/rm -f /{}/test '".format(
+        output = subprocess.run("ansible all -f 230  -i '{},' -m shell -a 'iostat -xy -d dm-0 2 2 |tail -n2'".format(
             hn, panel, panel), shell=True, stdout=subprocess.PIPE, universal_newlines=True)
         for l in str(output.stdout).split('\n'):
-            if "MB" in l:
-                print(l)
-                tray = l.replace(',', '.').split()
-                print(tray)
-        try:
-            sp = tray[-2].split('.')[0]
-            json_body = [{"measurement": "nodeDdspeed", "tags": {"nodename": hn, },
-                          "fields": {"ddspeed": int(sp)}}]
-            print(json_body)
-            print(sendinflux(json_body))
-        except IndexError:
-            print('Json format error for {}'.format(hn))
-            continue
+#            if "MB" in l:
+             #   print(l)
+             #   tray = l.replace(',', '.').split()
+            lst = l.strip().split(' ')
+            if float(l[-1][1:3]) > 95:
+                print('##{} {} \n{}'.format(hn,l,lst[-1]))
+              #  print(tray)
+#        try:
+#            sp = tray[-2].split('.')[0]
+#            json_body = [{"measurement": "nodeDdspeed", "tags": {"nodename": hn, },
+#                          "fields": {"ddspeed": int(sp)}}]
+#            sendinflux(json_body)
+#        except IndexError:
+#            print('Json format error for {}'.format(hn))
+#            continue
