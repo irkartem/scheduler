@@ -34,7 +34,7 @@ def decreaseLimit(host, elid, lmt, panel='vmmgr'):
 
 
 def sendinflux(jdata):
-    client = InfluxDBClient('store.firstvds.ru', 8086, 'cron', 'Yuoph2ah', 'clusters')
+    client = InfluxDBClient('store.firstvds.ru', 8086, 'cron', 'asdad', 'clusters')
     return client.write_points(jdata)
 
 
